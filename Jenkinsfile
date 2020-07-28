@@ -1,7 +1,17 @@
 pipeline{
   stages{
     stage('Restore'){
-      echo "Prueba con jenkins"
+      steps{
+        echo "Prueba con jenkins"
+      }
+    }
+  }
+  post {
+    success{
+      echo "salio todo ok"
+    }
+    failure{
+       echo "NO salio todo ok"
     }
   }
 }
