@@ -1,17 +1,21 @@
-pipeline{
-  stages{
-    stage('Restore'){
-      steps{
-        echo "Prueba con jenkins"
-      }
-    }
-  }
-  post {
-    success{
-      echo "salio todo ok"
-    }
-    failure{
-       echo "NO salio todo ok"
-    }
-  }
+pipeline {
+	agent any
+	stages {
+    	stage('Build') {
+        	steps {
+            	sh 'make'
+        	}
+    	}
+    	stage('Test'){
+        	steps {
+            	sh 'make check'
+            	junit 'reports/**/*.xml'
+        	}
+    	}
+    	stage('Deploy') {
+        	steps {
+            	sh 'make publish'
+        	}
+    	}
+	}
 }
